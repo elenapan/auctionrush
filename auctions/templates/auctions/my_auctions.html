@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}<title>My Auctions - Auction Rush</title>{% endblock %}
+{% block content %}
+
+<h2> My auctions </h2>
+{% if my_auctions_list %}
+    <ul class="my-auction-list">
+    {% for auction in my_auctions_list %}
+        <li class="my-auction-li"><a class="my-auction-link" href="{% url 'auctions:detail' auction.id %}">{{ auction.title }}</a>
+            <hr>
+            <div class="my-auction-date">Added: {{ auction.date_added }}</div>
+            {% if auction.is_active %}
+                <span class="my-auction-status-active">
+                    Pending
+                </span>
+                <span class="my-auction-value">
+                    {{ auction.min_value }}$
+                </span>
+            {% else %}
+                {% if auction.final_value %}
+                <span class="my-auction-status-resolved">
+                    Final value: {{ auction.final_value }}$
+                </span>
+                {% else %}
+                <span class="my-auction-status-no_winner">
+                    No winner
+                </span>
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h4>No auctions are available.</h4>
+{% endif %}
+
+{% endblock %}

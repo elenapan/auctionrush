@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}<title>My Bids - Auction Rush</title>{% endblock %}
+{% block content %}
+
+<h2> My bids </h2>
+{% if my_bids_list %}
+<ul class="my-bid-list">
+    {% for bid in my_bids_list %}
+        <li class="my-bid-li"><a class="my-bid-link" href="{% url 'auctions:detail' bid.auction.id %}">{{ bid.auction.title }}</a>
+            <hr>
+            <div class="my-bid-label">
+                My last bid: {{ bid.amount }}$
+                <div class="my-bid-date">({{ bid.date }})</div>
+            </div>
+            {% if bid.auction.is_active %}
+                <div class="my-bid-status-active">Pending</div>
+            {% else %}
+                {% if bid.auction.winner and bid.auction.winner == user %}
+                    <div class="my-bid-status-won">Won for {{ bid.amount }}$</div>
+                {% else %}
+                    <div class="my-bid-status-lost">Lost</div>
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <h4>No bids are available.</h4>
+{% endif %}
+
+{% endblock %}

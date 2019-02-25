@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% block title %}<title>{{ auction.title }} - Auction Rush</title>{% endblock %}
+
+<h1> {{ auction.title }} </h1>
+<div class="wrapper">
+    {% if not own_auction %}
+        {% if auction.is_active %}
+        <!-- <div class="bid_box"> -->
+        <form action="{% url 'auctions:bid' auction.id %}" method="post">
+        <!-- <form action="/auctions/{{ auction.id }}/bid/" method="post"> -->
+        {% csrf_token %}
+        <div class=\"input_label\">
+        {% if error_message %}<p class="error" ><strong>{{ error_message }}</strong></p>{% endif %}
+        {% if already_bid %}
+            <h3> Current bid: {{ bid_amount }} </h3>
+        {% endif %}
+        <span>Enter amount ($):</span>
+        <span class="required_field" >*</span>
+        </div>
+        <input class="textbox" type="text" class="input_box" name="amount">
+        <br>
+        <a><input class="submit_button" type="submit" class="submit_button" value="Bid"></a>
+        </form>
+        <br>
+        <!-- </div> -->
+        {% endif %}
+    {% endif %}
+</div>
+<div class="wrapper">
+    <span class="auction-card">
+        <span><img class="auction_image_index" src="{{ auction.image.url }}"></span>
+            {% if auction.is_active %}
+                {% if auction.remaining_minutes < 2 %}
+                    <div class="auction-card-urgent">Less than {{ auction.remaining_minutes }}m</div>
+                {% else %}
+                    <div class="auction-card-active">Less than {{ auction.remaining_minutes }}m</div>
+                {% endif %}
+            {% else %}
+            <div class="auction-card-inactive">Expired</div>
+            {% endif %}
+            <div class="auction-card-value">{{ auction.min_value }}$</div>
+        </div>
+    </span>
+</div>
+{% if auction.desc %}
+<div class="wrapper">
+    <div class="desc_box">
+    <div class="desc_box_title">Description</div>
+    <hr>
+    {{ auction.desc }}
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
