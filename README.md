@@ -27,6 +27,6 @@ Powered by [okeanos](https://okeanos.grnet.gr).
 ![Screenshot](./screenshots/computer4.png?raw=true "bid on auction")
 ![Screenshot](./screenshots/computer5.png?raw=true "create auction")
 ### Phone
-![Screenshot](./screenshots/phone1.png?raw=true "all auctions")
-![Screenshot](./screenshots/phone2.png?raw=true "my auctions")
-![Screenshot](./screenshots/phone3.png?raw=true "my bids")
+![Screenshot](./screenshots/phone1.png?raw=true =250x250 "all auctions")
+![Screenshot](./screenshots/phone2.png?raw=true =250x250 "my auctions")
+![Screenshot](./screenshots/phone3.png?raw=true =250x250 "my bids")
