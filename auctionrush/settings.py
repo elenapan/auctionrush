@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
     'auction-rush.xyz',
     'auctionrush.tk',
     'www.auctionrush.tk',
+    '83.212.103.177',
     # '192.168.1.5',
     # 'localhost',
 ]
